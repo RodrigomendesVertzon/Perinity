@@ -1,0 +1,5 @@
+package com.perinity.domain.model;
+
+public class Departamento {
+
+}

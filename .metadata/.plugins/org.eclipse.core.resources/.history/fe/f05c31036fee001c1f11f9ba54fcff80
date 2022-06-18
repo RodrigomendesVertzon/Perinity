@@ -1,0 +1,30 @@
+package com.testetres;
+
+import java.util.Scanner;
+
+public class Quatro {
+
+	public static void main(String[] args) {
+		
+		int[] arrayUm = new int[5];
+		int[] arrayDois = new int [5];
+		
+		Scanner input = new Scanner(System.in);
+		
+		for (int i = 0; i < 5; i++) {
+			System.out.printf("Digite o valor do arrayUm[%d]: ", i);
+			arrayUm[i] = input.nextInt();
+		}
+		
+		for (int i = 0; i < 5; i++) {
+			System.out.printf("Digite o valor do arrayDois[%d]", i);
+			arrayDois[i] = input.nextInt();
+		}
+		
+		input.close();
+		
+		System.out.print(arrayUm + arrayDois);
+
+	}
+
+}

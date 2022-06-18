@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		int[] homens = new int[2];
+		int [] mulheres = new int[2];
+		int soma;
+		double produto;
+
+		Scanner input = new Scanner(System.in);
+		
+		for(int i = 0; i < homens.length; i++) {
+			System.out.printf("Digite a idade do homem %d:", (i+1));
+			homens[i] = input.nextInt();
+		}
+		
+		for (int i= 0; i < mulheres.length; i++) {
+			System.out.printf("Digite a idade do homem %d:", i);
+			mulheres[i] = input.nextInt();
+		}
+		
+		input.close();
+		
+		for (int i = 0; i < homens.length; i++) {
+			
+		}
+		
+		System.out.println();
+	}	
+}

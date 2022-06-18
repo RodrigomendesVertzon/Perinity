@@ -1,0 +1,12 @@
+package com.perinity.domain.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="departamentos")
+public class Departamento {
+
+	private 
+	
+}

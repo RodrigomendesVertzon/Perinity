@@ -1,0 +1,5 @@
+package com.perinity.domain.repository;
+
+public interface TarefaRepository {
+
+}

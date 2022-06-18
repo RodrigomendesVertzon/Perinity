@@ -1,0 +1,4 @@
+insert into pessoa (id,nome) values (1,'Roberto')
+insert into pessoa (id,nome) values (1,'Rsdsadserto')
+insert into pessoa (id,nome) values (1,'Rie')
+insert into pessoa (id,nome) values (1,'Robertddaadsdas')

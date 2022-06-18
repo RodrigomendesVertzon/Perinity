@@ -1,0 +1,5 @@
+package com.perinity.domain.service;
+
+public class DepartamentoService {
+
+}

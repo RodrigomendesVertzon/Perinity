@@ -1,0 +1,23 @@
+
+public class Main {
+
+	public static void main(String[] args) {
+		int x = -10, y = -10, z = 0;
+		String resposta;
+		
+		z = (x*y) + 5;
+		
+		if (z <= 0) {
+			resposta = "A";
+		}
+		else if (z <= 100) {
+			resposta = "B";
+		}
+		else {
+			resposta = "C";
+		}
+		
+		System.out.println(z);
+		System.out.println(resposta);
+ 	}
+}

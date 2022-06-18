@@ -1,0 +1,8 @@
+package com.perinity.domain.model;
+
+import javax.persistence.Table;
+
+@Table(name="tarefas")
+public class Tarefa {
+
+}

@@ -1,0 +1,15 @@
+package com.testetres;
+
+import java.util.Scanner;
+
+public class ExercicioDois {
+	
+	int[] homens = new int[2];
+	int[] mulheres = new int[2];
+	int mulherMaisVelha, homemMaisVelho, mulherMaisNova, homemMaisNovo, soma = 0;
+	
+	Scanner input = new Scanner(System.in);
+	
+	for (int i = 0; i < homens)
+	
+}

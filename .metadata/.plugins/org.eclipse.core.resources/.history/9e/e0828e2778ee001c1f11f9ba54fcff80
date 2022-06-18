@@ -1,0 +1,6 @@
+package com.perinity.domain.service;
+
+@Service
+public class PessoaService {
+
+}
