@@ -1,0 +1,35 @@
+package com.perinity.api.dto;
+
+import java.util.List;
+
+import com.perinity.domain.model.Departamento;
+import com.perinity.domain.model.Pessoa;
+import com.perinity.domain.model.Tarefa;
+
+public class DepartamentoDto {
+
+	private Departamento departamento;
+	private List<Pessoa> pessoas;
+	private List<Tarefa> tarefas;
+	
+	
+	public List<Departamento> getDepartamentos() {
+		return departamentos;
+	}
+	public void setDepartamentos(List<Departamento> departamentos) {
+		this.departamentos = departamentos;
+	}
+	public List<Pessoa> getPessoas() {
+		return pessoas;
+	}
+	public void setPessoas(List<Pessoa> pessoas) {
+		this.pessoas = pessoas;
+	}
+	public List<Tarefa> getTarefas() {
+		return tarefas;
+	}
+	public void setTarefas(List<Tarefa> tarefas) {
+		this.tarefas = tarefas;
+	}
+
+}

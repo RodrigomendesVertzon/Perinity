@@ -1,0 +1,21 @@
+package com.perinity.domain.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.perinity.domain.repository.DepartamentoRepository;
+import com.perinity.domain.repository.PessoaRepository;
+import com.perinity.domain.repository.TarefaRepository;
+
+@Service
+public class DepartamentoService {
+
+	@Autowired
+	private DepartamentoRepository departamentoRepository;
+	@Autowired
+	private PessoaRepository pessoaRepository;
+	@Autowired
+	private TarefaRepository tarefaRepository;
+	
+	
+}

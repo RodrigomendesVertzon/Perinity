@@ -1,0 +1,22 @@
+package com.perinity.api.dto;
+
+import com.perinity.domain.model.Pessoa;
+
+public class PessoaComHorasGastasDto {
+
+	private Pessoa pessoa;
+	private double mediaHorasGastasPorTarefa;
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+	public double getMediaHorasGastasPorTarefa() {
+		return mediaHorasGastasPorTarefa;
+	}
+	public void setMediaHorasGastasPorTarefa(double mediaHorasGastasPorTarefa) {
+		this.mediaHorasGastasPorTarefa = mediaHorasGastasPorTarefa;
+	}
+	
+}

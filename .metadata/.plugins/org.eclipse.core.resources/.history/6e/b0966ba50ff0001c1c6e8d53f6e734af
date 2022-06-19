@@ -1,0 +1,13 @@
+package com.perinity.api.dto;
+
+import com.perinity.domain.model.Pessoa;
+import com.perinity.domain.model.Tarefa;
+
+public class PessoaComHorasGastasDto {
+
+	private Pessoa pessoa;
+	private Tarefa tarefa;
+	private double mediaHorasGastasPorTarefa;
+	
+	
+}

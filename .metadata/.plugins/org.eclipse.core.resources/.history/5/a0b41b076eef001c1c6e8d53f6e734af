@@ -1,0 +1,18 @@
+package com.perinity.api.handler;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import com.perinity.domain.exceptions.EntidadeNaoEncontradaException;
+
+@RestControllerAdvice
+public class NotFoundHandler {
+
+	@ExceptionHandler(EntidadeNaoEncontradaException.class)
+	public ResponseEntity<?> entidadeNaoEncontrada(
+			EntidadeNaoEncontradaException e) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+	}
+}

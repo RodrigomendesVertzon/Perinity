@@ -17,10 +17,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.perinity.api.dto.PessoaComHorasGastasDto;
+import com.perinity.api.dto.PessoaDto;
+import com.perinity.domain.exceptions.EntidadeEmUsoException;
+import com.perinity.domain.exceptions.EntidadeNaoEncontradaException;
+import com.perinity.domain.exceptions.RegraDeNegocioException;
 import com.perinity.domain.model.Pessoa;
+import com.perinity.domain.model.Tarefa;
 import com.perinity.domain.repository.PessoaRepository;
+import com.perinity.domain.repository.TarefaRepository;
 import com.perinity.domain.service.PessoaService;
 
 @RestController
@@ -31,12 +39,34 @@ public class PessoaController {
 	private PessoaService pessoaService;
 	@Autowired
 	private PessoaRepository pessoaRepository;
+	@Autowired 
+	private TarefaRepository tarefaRepository;
 
 	@GetMapping
-	public ResponseEntity<?> listarTodos() {
+	public ResponseEntity<?> listarTodosComTotalHorasGastas() {
 		List<Pessoa> pessoas = pessoaRepository.findAll();
+		double soma = tarefaRepository.tempoTotalTarefas();
 		
-		return ResponseEntity.status(HttpStatus.OK).body(pessoas);
+		PessoaDto pessoaDto = new PessoaDto();
+		pessoaDto.setPessoas(pessoas);
+		pessoaDto.setTotalHorasGastas(soma);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(pessoaDto);
+	}
+	
+	@GetMapping("/gastos")
+	public ResponseEntity<?> listarPorNomeComMedia(@RequestParam("nome") String nome) {
+		
+		Pessoa pessoa = pessoaRepository.findByNome(nome);
+		int media = tarefaRepository.mediaTempoTarefas(pessoa.getId());
+		List<Tarefa> tarefas = tarefaRepository.findAllByIdPessoa(pessoa);
+		
+		PessoaComHorasGastasDto pessoaDto = new PessoaComHorasGastasDto();
+		pessoaDto.setPessoa(pessoa);
+		pessoaDto.setMediaHorasGastasPorTarefa(media);
+		pessoaDto.setTarefa(tarefas);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(pessoaDto);
 	}
 	
 	@PostMapping
@@ -44,7 +74,7 @@ public class PessoaController {
 		try {
 			pessoaService.registrar(pessoa);
 			return ResponseEntity.status(HttpStatus.CREATED).body(pessoa);
-		}catch (RuntimeException e) {
+		}catch (RegraDeNegocioException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 	}
@@ -52,7 +82,7 @@ public class PessoaController {
 	@Transactional
 	@PutMapping("/{pessoaId}")
 	public ResponseEntity<?> alterar(@RequestBody Pessoa pessoa,
-			@PathVariable Long pessoaId) {
+			@PathVariable Integer pessoaId) {
 		try {
 			Optional<Pessoa> pessoaAtual = pessoaRepository.findById(pessoaId);			
 			if (pessoaAtual != null) {
@@ -62,19 +92,25 @@ public class PessoaController {
 			}
 			return ResponseEntity.notFound().build();
 			
-		}catch (RuntimeException e) {
+		}catch (RegraDeNegocioException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		
+		}catch (EntidadeNaoEncontradaException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
 	}
 	
 	@DeleteMapping("/{pessoaId}")
-	public ResponseEntity<?> remover(@PathVariable Long pessoaId) {
+	public ResponseEntity<?> remover(@PathVariable Integer pessoaId) {
 		try {
 			pessoaService.remover(pessoaId);
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 			
-		}catch (RuntimeException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}catch (EntidadeNaoEncontradaException e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+			
+		}catch (EntidadeEmUsoException e) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
 		}
 	}
 	

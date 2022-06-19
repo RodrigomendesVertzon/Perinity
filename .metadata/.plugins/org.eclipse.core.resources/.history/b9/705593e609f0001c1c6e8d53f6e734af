@@ -1,0 +1,5 @@
+package com.perinity.api.dto;
+
+public class PessoaComHorasGastasDto {
+
+}

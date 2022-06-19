@@ -1,0 +1,32 @@
+package com.perinity.api.handler;
+
+import java.time.LocalDateTime;
+
+public class ExceptionDescriptor {
+	
+	private String apiVersion = "v1";
+	private String message;
+	private LocalDateTime timestamp;
+	
+	public String getApiVersion() {
+		return apiVersion;
+	}
+	public void setApiVersion(String apiVersion) {
+		this.apiVersion = apiVersion;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public LocalDateTime getTimestamp() {
+		return timestamp;
+	}
+	public void setTimestamp(LocalDateTime timestamp) {
+		this.timestamp = timestamp;
+	}
+	
+	
+	
+}

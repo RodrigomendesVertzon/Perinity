@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.lang.NonNull;
+
 @Entity
 @Table(name="pessoa")
 public class Pessoa {
@@ -18,38 +20,36 @@ public class Pessoa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="nome", nullable = false)
+	@NonNull
+	@Column(name="nome")
 	private String nome;
 	
 	@OneToOne(cascade = CascadeType.REFRESH)
-	@JoinColumn(name="id_departamento")
+	@JoinColumn(name="id_departamento", nullable=false)
+	@NonNull
 	private Departamento idDepartamento;
 		
 //	getters and setters
 	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	public Departamento getDepartamento() {
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public Departamento getIdDepartamento() {
 		return idDepartamento;
 	}
-
-	public void setDepartamento(Departamento departamento) {
-		this.idDepartamento = departamento;
+	public void setIdDepartamento(Departamento idDepartamento) {
+		this.idDepartamento = idDepartamento;
 	}
-
 	
 }

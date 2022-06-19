@@ -18,23 +18,23 @@ public class Departamento {
 	public int id;
 	
 	@NonNull
-	@Column(name="nome")
-	public String nome;
+	@Column(name="titulo")
+	public String titulo;
 
+//	getters and setters
+	
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getTitulo() {
+		return titulo;
 	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 	
 }

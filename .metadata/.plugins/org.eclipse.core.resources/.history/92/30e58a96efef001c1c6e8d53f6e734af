@@ -1,0 +1,18 @@
+package com.perinity.domain.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.perinity.domain.model.Tarefa;
+
+public interface TarefaRepository extends JpaRepository<Tarefa, Integer> {
+
+	@Query(value=
+			"SELECT SUM(duracao) AS 'Total de Horas Trabalhadas' FROM tarefa "
+			)
+	int totalHorasTrabalhadas();
+	
+	List<Tarefa> findAllByIdPessoaIsNull();
+}

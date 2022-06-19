@@ -1,0 +1,66 @@
+package com.perinity.domain.service;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+import com.perinity.domain.exceptions.EntidadeEmUsoException;
+import com.perinity.domain.exceptions.EntidadeNaoEncontradaException;
+import com.perinity.domain.exceptions.RegraDeNegocioException;
+import com.perinity.domain.model.Pessoa;
+import com.perinity.domain.model.Tarefa;
+import com.perinity.domain.repository.PessoaRepository;
+import com.perinity.domain.repository.TarefaRepository;
+
+@Service
+public class PessoaService {
+
+	@Autowired
+	private PessoaRepository pessoaRepository;
+	@Autowired
+	private TarefaRepository tarefaRepository;
+	
+	
+	public double listarTodos() {
+		List<Pessoa> pessoas = pessoaRepository.findAll();
+		List<Tarefa> tarefas = tarefaRepository.findAll();
+		double soma = 0;
+		
+		for (int i = 0; i< tarefas.size(); i++) {
+			soma += tarefas.get(i).getDuracao();
+		}
+		
+		return soma;
+	}
+	
+	@Transactional
+	public Pessoa registrar(Pessoa pessoa) {
+		
+		if(StringUtils.isEmpty(pessoa.getNome())) {
+			throw new RegraDeNegocioException("O nome deve ser informado.");
+		}
+		if(StringUtils.isEmpty(pessoa.getIdDepartamento())) {
+			throw new RegraDeNegocioException("o idDepartamento deve ser informado.");
+		}
+		
+		return pessoaRepository.saveAndFlush(pessoa);
+	}
+	
+	@Transactional
+	public void remover(Integer pessoaId) {
+		try {
+			pessoaRepository.deleteById(pessoaId);
+			pessoaRepository.flush();		
+		}catch (EmptyResultDataAccessException e) {
+			throw new EntidadeNaoEncontradaException("Entidade não encontrada.");
+		
+		}catch (DataIntegrityViolationException e) {
+			throw new EntidadeEmUsoException("Entidade não pode ser excluída pois está em uso.");
+		}
+	}
+}

@@ -1,0 +1,12 @@
+package com.perinity.domain.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.perinity.domain.model.Tarefa;
+
+public interface TarefaRepository extends JpaRepository<Tarefa, Integer> {
+
+	List<Tarefa> getAllByIdDepartamento(int id);
+}

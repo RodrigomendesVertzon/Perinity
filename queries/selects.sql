@@ -16,14 +16,14 @@ tarefas não finalizadas
 Use Perinity
 
 select 
-	(select titulo from departamento d where d.id=iddepartamento)	[Departamento],
+	(select titulo from departamento d where d.id=id_departamento)	[Departamento],
 	case when finalizado = 1 then 'Tarefa Finalizada'
             when finalizado = 0 then 'Tarefa Não Finalizada'
 			end														[Status da Tarefa], 
 	count(*)														[Quantidade de tarefas]
 from tarefa			
-group by iddepartamento, finalizado
-order by 	(select titulo from departamento d where d.id=iddepartamento)
+group by id_departamento, finalizado
+order by 	(select titulo from departamento d where d.id=id_departamento)
 
 /*************Fim do Select do item 001********/
 
@@ -47,7 +47,7 @@ select top 1 nome, sum(duracao) [quantidade de horas]
 
 from tarefa as t
 left join pessoa as p
-on t.idpessoa = p.id
+on t.id_pessoa = p.id
 group by nome
 order by sum(duracao) desc
 
@@ -60,7 +60,7 @@ select top 1 nome, sum(duracao) [quantidade de horas]
 
 from tarefa as t
 left join pessoa as p
-on t.idpessoa = p.id
+on t.id_pessoa = p.id
 where nome is not null and finalizado = 1
 group by nome
 order by sum(duracao) desc
@@ -75,7 +75,7 @@ select top 1 nome,
 	sum(duracao) [quantidade de horas]
 from tarefa as t
 	left join pessoa as p
-	on t.idpessoa = p.id
+	on t.id_pessoa = p.id
 where nome is not null and finalizado = 0
 	group by nome
 	order by sum(duracao) desc
@@ -94,7 +94,7 @@ prazo decrescente.
 select	titulo														[Titulo da tarefa], 
 		FORMAT( prazo, 'd', 'pt-br' )								[Prazo de entrega],
 
-	case when t.idpessoa is null then 'Pendente'
+	case when t.id_pessoa is null then 'Pendente'
             else 'Encaminhado para ' + p.nome
 			end														[Status da Tarefa],
 duracao																[quantidade de horas]
@@ -102,5 +102,5 @@ duracao																[quantidade de horas]
 from tarefa as t
 
 left join pessoa as p
-on t.idpessoa = p.id
+on t.id_pessoa = p.id
 order by prazo

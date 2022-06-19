@@ -1,0 +1,16 @@
+package com.perinity.domain.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.perinity.domain.model.Pessoa;
+
+public interface PessoaRepository extends JpaRepository<Pessoa, Integer> {
+
+	@Query(value = 
+			"SELECT * FROM PESSOAS", 
+			nativeQuery = true)
+	List<?> listarTodos();
+}

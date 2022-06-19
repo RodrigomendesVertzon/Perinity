@@ -18,10 +18,10 @@ go
 create table pessoa 
 (	id int identity, 
 	nome varchar(70),
-	idDepartamento int,
+	id_departamento int,
 	
 	CONSTRAINT PK_pessoa PRIMARY KEY (id),
-	CONSTRAINT FK_PessoaDepartamento FOREIGN KEY (idDepartamento)
+	CONSTRAINT FK_PessoaDepartamento FOREIGN KEY (id_departamento)
 	REFERENCES departamento(id)
 )
 
@@ -32,12 +32,12 @@ create table tarefa
 	titulo varchar(200),
 	descricao varchar(2000),
 	prazo datetime, 
-	idDepartamento int, 
+	id_departamento int, 
 	duracao int, 
-	idPessoa int,
+	id_pessoa int,
 	finalizado bit,
 
 	CONSTRAINT PK_tarefa PRIMARY KEY (id),
-	CONSTRAINT FK_TarefaDepartamento FOREIGN KEY (idDepartamento) REFERENCES departamento(id),
-	CONSTRAINT FK_TarefaPessoa FOREIGN KEY (idPessoa) REFERENCES pessoa(id)
+	CONSTRAINT FK_TarefaDepartamento FOREIGN KEY (id_departamento) REFERENCES departamento(id),
+	CONSTRAINT FK_TarefaPessoa FOREIGN KEY (id_pessoa) REFERENCES pessoa(id)
 )
