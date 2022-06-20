@@ -1,0 +1,11 @@
+server.port=3387
+server.servlet.context-path=/
+
+spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver
+spring.datasource.url=jdbc:sqlserver://O2o.Vertzon.com.br;databaseName=perinity
+spring.datasource.username=perinity	
+spring.datasource.password=Perinity@2022
+
+spring.jpa.database-platform=org.hibernate.dialect.SQLServer2008Dialect
+spring.jpa.generate-ddl=true
+spring.jpa.hibernate.ddl-auto=create
